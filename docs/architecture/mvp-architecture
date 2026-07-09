@@ -1,0 +1,57 @@
+# MVP System Design
+
+## Aim
+This document aims to write down the key system design idea for our thin, simple MVP
+
+The MVP will allow a user to:
+- Search for a film from an external database
+- Mark it as watched
+- Rate the film out of 100
+- See their watched films
+
+## High Leveel Components
+
+### UI
+The UI is the front end and is what hte user interacts with. The UI will allow a user to:
+
+- allow users to search for films from an external database
+- display search results
+- allow users to add watched films to their film history
+- allow users to rate films
+- display watched films along with their ratings
+
+## Backend API
+This is a middle layer that primarily does orchestration. This is a middle point between the true backend architecture and the front end UI, it gives us a clean layer to avoid the UI directly talking to multiple places. 
+
+Responsibilities:
+- receive requests from the UI
+- apply basic application rules
+- communicate with the database
+- communicate with the external API 
+- return useful responses to the UI
+
+### Database
+Store's culture engines own data. 
+
+Responsibilities:
+- Store watched films
+- store user ratings
+- store local film records
+
+### External Movie API
+A third party movie database used for film name search and validation.
+
+Responsibilities:
+- provide film search results
+- provide basic film metadata
+
+## High-Level Flow
+
+```text
+User
+  ↓
+UI
+  ↓
+Backend API
+  ↓        ↓
+Database  External Movie API
