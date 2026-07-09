@@ -1,0 +1,7 @@
+# ADR-003-Pick server-rendered HTML for UI
+
+## Status
+Accepted
+
+## Context
+We have chosed a simple server-rendered HTML as our UI. This is in place of React for now as we don't want to be learning too much at once. This is a trade-off but we can move to React later if needed. 

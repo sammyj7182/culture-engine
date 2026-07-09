@@ -1,0 +1,7 @@
+# ADR-002-Use FastAPI for Backend API
+
+## Status
+Accepted
+
+## Context
+We chose FastAPI because Culture Engine needs a clear API boundary between the frontend, database, and external movie provider, and FastAPI supports typed request/response models and automatic API documentation while staying within Python.
