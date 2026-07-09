@@ -1,0 +1,7 @@
+# ADR-005-external_api-TMDB
+
+## Status
+Accepted
+
+## Context
+We have decided on tmdb as our external film API. It has a rich selection of films and lots of film metadata so room for growth. The trade off is slightly steeper learning curve.

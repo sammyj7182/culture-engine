@@ -1,0 +1,7 @@
+# ADR-004-postgreSQL-as-database
+
+## Status
+Accepted
+
+## Context
+We have chosen a slightly more complex database technology in postgreSQL. The idea is this is a strong employability signal and an interesting tech stack to learn.
