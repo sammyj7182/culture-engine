@@ -2,30 +2,61 @@
 
 ## Current Status
 
-- Product brief complete
-- MVP scope complete
-- High-level architecture complete
-- User journeys complete
-- Data model complete
-- API design complete
-- ADRs started
-- Initial source folders created
+### Documentation
+- ✅ Product brief complete
+- ✅ MVP scope complete
+- ✅ High-level architecture complete
+- ✅ User journeys complete
+- ✅ Data model complete
+- ✅ API design complete
+- ✅ ADRs started
+
+### Development Environment
+- ✅ Python virtual environment configured
+- ✅ Project configured using `pyproject.toml`
+- ✅ Dependencies installed
+- ✅ `src` package structure established
+- ✅ Application installed in editable mode
+
+### Backend
+- ✅ Minimal FastAPI application running locally
+- ✅ Uvicorn development server configured
+- ✅ Basic routing implemented
+- ✅ Film search endpoint implemented
+- ✅ Initial service layer extracted (`film_service.py`)
+- ✅ Basic separation established between API layer and business logic
+
+---
 
 ## Current Focus
 
-Set up the local development environment and get a minimal FastAPI app running.
+Begin replacing the hard-coded film search with a real integration to the TMDB API.
+
+---
 
 ## Next Steps
 
-1. Create Python project configuration.
-2. Set up local virtual environment.
-3. Install FastAPI and Uvicorn.
-4. Create minimal FastAPI app.
-5. Run app locally.
-6. Add basic health route.
-7. Commit working baseline.
+1. Register for a TMDB API key.
+2. Introduce environment variable management (`.env`).
+3. Build a dedicated TMDB client.
+4. Replace hard-coded film search with a real API request.
+5. Return structured film results from TMDB.
+6. Introduce the first application model for a film.
+7. Begin writing tests for the service layer.
+
+---
 
 ## Open Questions
 
-- When do we introduce Docker?
-- When do we introduce PostgreSQL locally?
+- At what point should Docker be introduced?
+- When should PostgreSQL replace in-memory data?
+- When should routing be split into dedicated router modules?
+- What should the long-term project package structure look like?
+
+## Architectural Decisions (Informal)
+
+- Use the `src` project layout.
+- Install the project in editable mode during development.
+- Keep FastAPI routes thin.
+- Keep HTTP concerns within the API layer.
+- Keep business logic inside service modules.
