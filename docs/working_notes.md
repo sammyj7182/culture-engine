@@ -17,6 +17,7 @@
 - ✅ Dependencies installed
 - ✅ `src` package structure established
 - ✅ Application installed in editable mode
+- ✅ Environment variable management configured (`.env`)
 
 ### Backend
 - ✅ Minimal FastAPI application running locally
@@ -24,25 +25,27 @@
 - ✅ Basic routing implemented
 - ✅ Film search endpoint implemented
 - ✅ Initial service layer extracted (`film_service.py`)
-- ✅ Basic separation established between API layer and business logic
+- ✅ Dedicated TMDB client implemented (`tmdb_client.py`)
+- ✅ Successful authenticated requests to the TMDB API
+- ✅ Basic separation established between API, service and external client layers
 
 ---
 
 ## Current Focus
 
-Begin replacing the hard-coded film search with a real integration to the TMDB API.
+Replace the remaining hard-coded functionality with real TMDB integration and begin introducing automated testing.
 
 ---
 
 ## Next Steps
 
-1. Register for a TMDB API key.
-2. Introduce environment variable management (`.env`).
-3. Build a dedicated TMDB client.
-4. Replace hard-coded film search with a real API request.
-5. Return structured film results from TMDB.
-6. Introduce the first application model for a film.
-7. Begin writing tests for the service layer.
+1. Integrate `film_service.py` with the TMDB client.
+2. Return simplified Culture Engine film data instead of raw TMDB responses.
+3. Introduce the first application model (Film / FilmSearchResult).
+4. Introduce `pytest` and write the first service-layer tests.
+5. Add basic error handling for TMDB requests.
+6. Introduce a central configuration module.
+7. Review API response models.
 
 ---
 
@@ -51,7 +54,10 @@ Begin replacing the hard-coded film search with a real integration to the TMDB A
 - At what point should Docker be introduced?
 - When should PostgreSQL replace in-memory data?
 - When should routing be split into dedicated router modules?
-- What should the long-term project package structure look like?
+- When should configuration be centralised into `config.py`?
+- How should external API failures be surfaced to the API layer?
+
+---
 
 ## Architectural Decisions (Informal)
 
@@ -60,3 +66,5 @@ Begin replacing the hard-coded film search with a real integration to the TMDB A
 - Keep FastAPI routes thin.
 - Keep HTTP concerns within the API layer.
 - Keep business logic inside service modules.
+- Keep external integrations isolated in dedicated client modules.
+- Store secrets outside source control using environment variables.
