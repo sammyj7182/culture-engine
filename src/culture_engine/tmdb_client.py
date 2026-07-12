@@ -14,8 +14,8 @@ TMDB_BEARER_TOKEN = os.getenv("TMDB_BEARER_TOKEN")
 # Hard code URL for now but in future will live somewhere else (maybe config)
 TMDB_API_URL = "https://api.themoviedb.org/3"
 
-# define a function to search for a film using the TMDB API
-def search_film(query: str):
+# define a function to search for films using the TMDB API
+def search_films_tmdb(query: str):
     """
     Inputs:
         Query (str): The search query for the film. Usually the title of the film.
@@ -33,5 +33,8 @@ def search_film(query: str):
     response = httpx.get(url, 
                          params={"query": query}, 
                          headers={"Authorization": f"Bearer {TMDB_BEARER_TOKEN}"})
-    
-    return response
+    # check response status code and raise an exception if the request was not successful
+    response.raise_for_status()
+    # output formatted JSON response
+    return response.json().get("results", [])
+
