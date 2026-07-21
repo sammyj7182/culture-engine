@@ -8,3 +8,8 @@ class TMDBAuthenticationError(Exception):
     """
     pass
 
+class TMDBUnavailableError(Exception):
+    """
+    Exception raised when the TMDB API is unavailable.
+    """
+    pass

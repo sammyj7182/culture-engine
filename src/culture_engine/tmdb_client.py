@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 
 # import exceptions module to handle custom exceptions
-from culture_engine.exceptions import TMDBAuthenticationError
+from .exceptions import TMDBAuthenticationError, TMDBUnavailableError
 
 # load the environment variables from the .env file
 load_dotenv()
@@ -32,16 +32,27 @@ def search_films_tmdb(query: str) -> list[dict]:
     # Build full film specific URL for the TMDB API search endpoint
     url = f"{TMDB_API_URL}/search/movie"
 
-    # Get response from the TMDB API using the httpx library
-    response = httpx.get(url, 
-                         params={"query": query}, 
-                         headers={"Authorization": f"Bearer {TMDB_BEARER_TOKEN}"})
     
+    try:
+        # Get response from the TMDB API using the httpx library
+        response = httpx.get(url, 
+                             params={"query": query}, 
+                             headers={"Authorization": f"Bearer {TMDB_BEARER_TOKEN}"})
+    except httpx.RequestError as e:
+        # If no response raise our specific exception for TMDB API being unavailable and include the request URL in the error message
+        raise TMDBUnavailableError("An error occurred while requesting from TMDB. The TMDB API may be unavailable.")  
+    
+    # IF failed authentication raise our specific exception for TMDB API authentication error
     if response.status_code == 401:
         raise TMDBAuthenticationError("Authentication failed. Please check your TMDB API bearer token.")
     
+    # If TMDB API is unavailable raise our specific exception for TMDB API being unavailable
+    if response.status_code in (500,502,503,504):
+        raise TMDBUnavailableError("The TMDB API is currently unavailable.")
+
     # check response status code and raise an exception if the request was not successful
     response.raise_for_status()
+
     # output formatted JSON response
     return response.json().get("results", [])
 
